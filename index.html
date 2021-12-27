@@ -15,6 +15,28 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $("#submitButton").click(function (event) {         
+                //preventDefault 는 기본으로 정의된 이벤트를 작동하지 못하게 하는 메서드이다. submit을 막음 
+                event.preventDefault(); 
+                $("#submitButton").prop("disabled", true);         
+                $.post("https://script.google.com/macros/s/AKfycbzmWNBtFFfujNsIzyGRa0BjQG7P3aoD0CpjwdRt8oWBRJ0lhFYty9R5mqbkSf-Dmvkd/exec",
+                    $('#contactForm').serialize(),                
+                    function(data,status) {
+                        if (data.trim() == "ok") {
+                            alert("산타 클로스에게 전달되었습니다.");   
+                            $("#submitButton").prop("disabled", false);
+                            location.reload();
+                            //console.log(status);
+                        } else {
+                            alert("산타 클로스에게 전달 실패");   
+                        }
+                        //alert("Data: " + data + "\nStatus: " + status);
+                        //$("#div1").html(data);
+                });
+            });
+        </script>
     </head>
     <body id="page-top">
         <!-- Navigation-->
